@@ -31,8 +31,9 @@ public class ZeroBankPage {
     @FindBy(xpath = "//a[@href='#ui-tabs-3']")
     public WebElement zeroBankPurchaseForeignCurrency;
 
-    @FindBy(xpath = "//select[@id='pc_currency']")
+    @FindBy(id = "pc_currency")
     public WebElement zeroBankCurrency;
+
 
 
 }

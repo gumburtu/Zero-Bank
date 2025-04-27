@@ -1,7 +1,10 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -9,6 +12,7 @@ import pages.ZeroBankPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +36,19 @@ public class HomeWork01 {
         // 5. Sign in tuşuna bas
         zeroBankPage.zeroBankSubmitButton.click();
 
+        // Sertifika sayfasını atla ve doğrudan index.html sayfasına git
+        Driver.getDriver().get("http://zero.webappsecurity.com/index.html");
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         // 6. Online Banking menüsüne tıkla ve Pay Bills sayfasına git
         zeroBankPage.zeroBankOnlineBanking.click();
+
+
         zeroBankPage.zeroBankPayBills.click();
 
         // Sayfa başlığında "Zero" geçtiğini doğrula
@@ -43,13 +58,20 @@ public class HomeWork01 {
         zeroBankPage.zeroBankPurchaseForeignCurrency.click();
 
         // 8. "Currency" dropdown'undan Eurozone (euro) seç
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Select select = new Select(zeroBankPage.zeroBankCurrency);
         select.selectByVisibleText("Eurozone (euro)");
 
         // 9. SoftAssert ile seçilen opsiyonun doğru olduğunu doğrula
         SoftAssert softAssert = new SoftAssert();
         String selectedOption = select.getFirstSelectedOption().getText();
-        softAssert.assertEquals(selectedOption, "Eurozone (euro)");
+        softAssert.assertEquals(selectedOption, "Eurozone (euro)", "Seçilen para birimi yanlış!");
+        softAssert.assertAll();
+
 
         // 10. SoftAssert ile dropdown içeriğinin doğru olduğunu doğrula
         List<String> expectedOptions = List.of(
