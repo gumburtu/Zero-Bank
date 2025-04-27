@@ -52,7 +52,7 @@ public class HomeWork01 {
         zeroBankPage.zeroBankPayBills.click();
 
         // Sayfa başlığında "Zero" geçtiğini doğrula
-        Assert.assertTrue(Driver.getDriver().getTitle().contains("Zero"), "Title 'Zero' içermiyor!");
+        Assert.assertTrue(Driver.getDriver().getTitle().contains("Zero"));
 
         // 7. "Purchase Foreign Currency" sekmesine geç
         zeroBankPage.zeroBankPurchaseForeignCurrency.click();
@@ -65,7 +65,11 @@ public class HomeWork01 {
         }
         Select select = new Select(zeroBankPage.zeroBankCurrency);
         select.selectByVisibleText("Eurozone (euro)");
-
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         // 9. SoftAssert ile seçilen opsiyonun doğru olduğunu doğrula
         SoftAssert softAssert = new SoftAssert();
         String selectedOption = select.getFirstSelectedOption().getText();
