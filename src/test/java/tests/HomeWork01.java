@@ -37,7 +37,7 @@ public class HomeWork01 {
         zeroBankPage.zeroBankSubmitButton.click();
 
         // Sertifika sayfasını atla ve doğrudan index.html sayfasına git
-        Driver.getDriver().get("http://zero.webappsecurity.com/index.html");
+        Driver.getDriver().navigate().back();
 
         try {
             Thread.sleep(2000);
